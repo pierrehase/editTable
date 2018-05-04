@@ -14,6 +14,7 @@
                 maxRows: 999,
                 first_row: true,
                 row_template: false,
+                default_type: false,
                 field_templates: false,
                 validate_field: function (col_id, value, col_type, $element) {
                     return true;
@@ -37,6 +38,7 @@
         // Build cell
         function buildCell(content, type) {
             content = (content === 0) ? "0" : (content || '');
+            type = type || s.default_type;
             // Custom type
             if (type && 'text' !== type){
                 var field = s.field_templates[type];
@@ -146,12 +148,13 @@
                 data[row] = [];
 
                 $(this).find('td:not(:last-child)').each(function (i, v) {
-                    if ( s.row_template && 'text' !== s.row_template[i] ){
-                        var field = s.field_templates[s.row_template[i]],
+                    var template = s.row_template ? s.row_template[i] : s.default_type;
+                    if ( template && 'text' !== template ){
+                        var field = s.field_templates[template],
                             el = $(this).find($(field.html).prop('tagName'));
                         
                         value = field.getValue(el);
-                        if ( !s.validate_field(i, value, s.row_template[i], el) ){
+                        if ( !s.validate_field(i, value, template, el) ){
                             is_validated = false;
                         }
                         data[row].push(value);

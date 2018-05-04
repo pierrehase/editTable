@@ -46,6 +46,11 @@ table.inputtable th {
 table.inputtable td input[type=text] {
 	border: 0;width: 90%;height: 100%;padding: 0 5%;text-align: center;
 }
+
+table.inputtable td textarea {
+	border: 0;width: 90%;height: 100%;padding: 0 5%;text-align: center;
+}
+
 /* Table body inputs on focus */
 table.inputtable tr td input:focus {
 	background-color: #fafafa;
